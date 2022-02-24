@@ -3,8 +3,8 @@ import s from 'styled-components'
 import Input from './Input'
 import ReplyList from './ReplyList'
 
-const Post = ({ post }) => {
-  const [replies, setReplies] = React.useState(
+const Reply = ({ layer, reply, setReply }) => {
+  const [state, setState] = React.useState(
     [],
   )
 
@@ -22,13 +22,13 @@ const Post = ({ post }) => {
     <>
       <Wrapper>
         <p>
-          Sender:
+          Responder:
           {' '}
-          {post.sender}
+          {reply.sender}
         </p>
         <p>
-          Post Content:
-          {post.content}
+          Reply Content:
+          {reply.content}
         </p>
 
         <VoteTracker>
@@ -43,24 +43,27 @@ const Post = ({ post }) => {
           <Flex>
             <button type="button" onClick={downVote}>Down-vote</button>
           </Flex>
-
         </VoteTracker>
 
-        <p>Why not send a reply ?</p>
+        <div>Why not send a reply ?</div>
+        {reply.layer < 2
+        && (
+        <>
+          <Input passlayer={reply.layer} posts={state} setPosts={setState} />
+          <ReplyList replies={state} />
+        </>
+        )}
 
-        <Input passlayer={0} posts={replies} setPosts={setReplies} />
-        <ReplyList replies={replies} />
       </Wrapper>
     </>
-
   )
 }
 
-export default Post
+export default Reply
 
 const Wrapper = s.div`
-  border: 10px solid red;
-  margin: 5px;
+  border: 10px solid blue;
+  padding: 5;
 `
 
 const VoteTracker = s.div`

@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
+
 import Title from './components/Title'
-import { NewPost } from './components/Form'
-import AllPosts from './components/AllPosts'
+import Input from './components/Input'
+import PostList from './components/PostList'
 
 const App = () => {
-  const [allPosts, setAllPosts] = useState([])
+  const [posts, setPosts] = React.useState(
+    [],
+
+    /// SHOULD STORE EVERYTHING, REPLIES AND ALL
+  )
 
   return (
-    <div className="mx-auto my-12 w-3/5">
+    <>
       <Title />
-      <NewPost allPosts={allPosts} setAllPosts={setAllPosts} />
-      <AllPosts allPosts={allPosts} />
-    </div>
+      <Input passlayer={0} posts={posts} setPosts={setPosts} />
+      <PostList posts={posts} />
+
+    </>
   )
 }
 
